@@ -5,7 +5,7 @@
 #include <sys/wait.h> 
 #define MAX 100
 
-char* read_from_console(void) //boyuta gore artirmali yapsan iyi olur bufferi asabilir. . .
+char* read_from_console (void) //boyuta gore artirmali yapsan iyi olur bufferi asabilir. . .
 {
 	char *line = (char*) malloc(MAX*sizeof(char));
 	char c;
@@ -25,7 +25,7 @@ char* read_from_console(void) //boyuta gore artirmali yapsan iyi olur bufferi as
 	return line;
 }
 
-char** command_tokenizer(char* str) 
+char** command_tokenizer (char* str) 
 {
 	char *token;
 	char **tokens = (char**) malloc(MAX*sizeof(char*));
@@ -42,19 +42,18 @@ char** command_tokenizer(char* str)
 		//printf("%s \n", token);
 		strcpy(tokens[i], token);
 		i++;
-	}
+	} tokens[i] = NULL;
 	return tokens;
 }
 
-int command_comparator(char** tokens) 
+int command_comparator (char** tokens) 
 {
 	char built_in[3][MAX] = { "exit",
 							"cd",
 							"help"
 							};
 	int i = 0;
-	char str[500] =">> Shell'e hosgeldiniz.\n>> Bu shell asagidakileri yapabilir.\n>> Temel UNIX Shell komutlarini yurutmek.\n>> cd, exit ve help built-in komutlarini calistirmak. \n>> Klavye ust ve alt ok tuslari ile komutlar arasinda gecis yapmak.\n>> Bu shell pipe iceren [command | command] komutlari desteklemez!!\n>> FATMA ZEHRA CETIN 17011068\n";
-	
+	char str[500] =">> Shell'e hosgeldiniz.\n>> Bu shell asagidakileri yapabilir:\n  >> Temel UNIX Shell komutlarini yurutmek.\n  >> cd, exit ve help built-in komutlarini calistirmak. \n  >> Klavye ok tuslari ile komutlar arasinda gecis yapmayi desteklemez!!\n  >> Bu shell pipe iceren [command | command] komutlari desteklemez!!\n  >> FATMA ZEHRA CETIN 17011068\n";
 	
 	while ((i < 3) && (strcmp(built_in[i], tokens[0]) != 0))
 	{
@@ -79,7 +78,7 @@ int command_comparator(char** tokens)
 	return 0;
 }
 
-void executor(char** tokens) 
+void executor (char** tokens) 
 {
 	pid_t pid;
 	int status;
@@ -102,9 +101,10 @@ void executor(char** tokens)
         while (wait(&status) != pid);
 }
 
-int main(int argc, char **argv)
+int main (int argc, char **argv)
 {
 	int true = 1;
+	char str1[500] =">> Shell'e hosgeldiniz.\n>> Bu shell asagidakileri yapabilir:\n  >> Temel UNIX Shell komutlarini yurutmek.\n  >> cd, exit ve help built-in komutlarini calistirmak. \n  >> Klavye ok tuslari ile komutlar arasinda gecis yapmayi desteklemez!!\n  >> Bu shell pipe iceren [command | command] komutlari desteklemez!!\n  >> FATMA ZEHRA CETIN 17011068\n";
 	char *str = (char*) malloc(MAX*sizeof(char));
 	char **tokens = (char**) malloc(MAX*sizeof(char*));
 	int i;
@@ -114,6 +114,7 @@ int main(int argc, char **argv)
 		tokens[i] = (char*) malloc(MAX*sizeof(char));
 	}
 	
+	printf("%s \n", str1);
 	while (true) 
 	{
 		str[0] = '\0';
@@ -127,5 +128,6 @@ int main(int argc, char **argv)
 		}
 		
 	}
+	
 	return 0;
 }
