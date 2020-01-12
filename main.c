@@ -64,7 +64,7 @@ int command_comparator (char** tokens)
 		switch(i) {
 			case 0:
 				printf("Shell exiting. . .\n");
-				exit(0);
+				exit(0); //hata var galiba
 				break;
 			case 1:
 				chdir(tokens[1]); 
